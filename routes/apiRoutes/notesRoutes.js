@@ -30,7 +30,7 @@ router.post('/notes', (req, res) => {
 
 router.delete('/notes/:id', (req, res) => {
     const id = req.params.id;
-    console.log(id);
+    console.log("Note with id: "+ id +" has been deleted!");
     deleteNote(id).then(data => {
         res.json(data);
     });
