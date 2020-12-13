@@ -18,14 +18,19 @@ router.post('/notes', (req, res) => {
         if (err) throw err;
         const obj = JSON.parse(data);
         //add id to note (add 1 to last value)
-        req.body.id = obj.length.toString();
+        if (!obj.length == 0) {
+            req.body.id = (parseInt(obj[obj.length -1]["id"])+1).toString();
+        } else {
+            req.body.id = "0"
+        }
+        
         res.json(createNote(req.body, obj));
         });
 });
 
 router.delete('/notes/:id', (req, res) => {
     const id = req.params.id;
-
+    console.log(id);
     deleteNote(id).then(data => {
         res.json(data);
     });
